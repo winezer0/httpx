@@ -111,11 +111,16 @@ type Options struct {
 	NoFallback                bool
 	protocol                  string
 	ShowStatistics            bool
+	//add InputURL
+	InputURL                  string
 }
 
 // ParseOptions parses the command line options for application
 func ParseOptions() *Options {
 	options := &Options{}
+	
+	//add InputURL
+	flag.StringVar(&options.InputURL, "u", "", "url containing domains")
 
 	flag.IntVar(&options.Threads, "threads", 50, "Number of threads")
 	flag.IntVar(&options.Retries, "retries", 0, "Number of retries")

@@ -192,7 +192,16 @@ func (runner *Runner) prepareInput() {
 		scanner = bufio.NewScanner(finput)
 	} else if fileutil.HasStdin() {
 		scanner = bufio.NewScanner(os.Stdin)
-	} else {
+	} else if runner.options.InputURL !="" {
+	//hander InputURL
+		s := runner.options.InputURL
+		p := make([]byte, len(s))
+		url, err := strings.NewReader(s), p
+		if err != nil {
+			fmt.Println(err)
+		}
+		scanner = bufio.NewScanner(url)
+	}else {
 		gologger.Fatalf("No input provided")
 	}
 
